@@ -1,0 +1,13 @@
+name: Download Image from URL
+on: [workflow_dispatch]
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Download image
+      uses: suisei-cn/actions-download-file@v1
+      with:
+        url: "https://imagefromci.com/image.jpg"
+        target: ./image
