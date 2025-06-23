@@ -1,13 +1,21 @@
 name: Download Image from URL
-on: [workflow_dispatch]
+on: 
+  push:
+    branches: [ "staging" ]
+  pull_request:
+    branches: [ "staging" ]
 jobs:
   download:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Create image folder
+      run: mkdir -p ./image
+
     - name: Download image
       uses: suisei-cn/actions-download-file@v1
       with:
         url: "https://imagefromci.com/image.jpg"
-        target: ./image
+        target: ./image/image.jpg
