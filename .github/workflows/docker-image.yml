@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      packages: write  # Needed to push to GitHub Container Registry (GHCR)
+      contents: read
+
     steps:
     - uses: actions/checkout@v4
 
@@ -21,10 +25,18 @@ jobs:
         IMAGE_NAME="ghcr.io/${REPO_OWNER_LOWER}/my-app:$TIMESTAMP"
         echo "IMAGE_NAME=$IMAGE_NAME" >> "$GITHUB_OUTPUT"
 
+    - name: Log in to GitHub Container Registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag ${{ steps.image_tag.outputs.IMAGE_NAME }}
 
+    - name: Push image to GHCR
+      run: |
+        docker push ${{ steps.image_tag.outputs.IMAGE_NAME }}
+
     - name: Show image name
       run: |
-        echo "::notice ::[Docker Build Success] Image created: ${{ steps.image_tag.outputs.IMAGE_NAME }}"
+        echo "::notice ::[Docker Image Pushed] You can pull this image using:"
+        echo "::notice ::docker pull ${{ steps.image_tag.outputs.IMAGE_NAME }}"
