@@ -7,19 +7,19 @@ on:
     branches: [ "staging" ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set image tag
+    - name: Set lowercase image tag
       id: image_tag
       run: |
         TIMESTAMP=$(date +%s)
-        IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/my-app:$TIMESTAMP"
-        echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_OUTPUT
+        REPO_OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+        IMAGE_NAME="ghcr.io/${REPO_OWNER_LOWER}/my-app:$TIMESTAMP"
+        echo "IMAGE_NAME=$IMAGE_NAME" >> "$GITHUB_OUTPUT"
 
     - name: Build the Docker image
       run: |
@@ -28,4 +28,3 @@ jobs:
     - name: Show image name
       run: |
         echo "::notice ::[Docker Build Success] Image created: ${{ steps.image_tag.outputs.IMAGE_NAME }}"
-
