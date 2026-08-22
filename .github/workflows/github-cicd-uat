@@ -3,10 +3,10 @@ name: UAT-atgk
 on:
   push:
     branches:
-      - staging
+      - dev
   pull_request:
     branches:
-      - main
+      - staging
 
 jobs:
 #  code-test:
