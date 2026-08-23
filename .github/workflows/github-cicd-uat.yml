@@ -72,6 +72,6 @@ jobs:
        podman ps
        sleep 3
        
-       curl --retry 3 http//localhost:8080 -I
+       curl --retry 3 http://localhost:8080 -I
        
   
