@@ -47,7 +47,7 @@ jobs:
   # job kedua
   trivy-test:
     runs-on: ubuntu-latest
-    need: build-test
+    needs: build-test
     steps:
 
     -
