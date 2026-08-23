@@ -63,9 +63,10 @@ jobs:
     -
      name: podman run
      run: |
-       podman run -t -p 80:80 atgk-dev
+       podman run -t -p 800:80 atgk-dev
 
        podman ps
 
-       curl://localhost:80
+       curl://localhost:8080
+       
   
