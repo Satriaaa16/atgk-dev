@@ -100,7 +100,7 @@ jobs:
        - 
          name: deploy on kubernetes
          run: |
-           kubectl create deployment atgk-deployment --images=${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest --replicas=3
+           kubectl create deployment atgk-deployment --image=${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest --replicas=3
            kubectl get deployment -A
            kubectl get pods -A
 
