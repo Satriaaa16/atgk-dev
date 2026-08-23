@@ -77,6 +77,26 @@ jobs:
 
        podman exec -it $container curl --retry 3 http://localhost:80 -I 
        podman exec -it $container curl http://localhost:80 -v
+    
+    kubernetes-test:
+       runs-on: ubuntu-latest
+       needs: build-test
+       steps: 
+
+       - 
+         name: install minikube
+         uses: actions/checkout@v4
+         with: 
+           repository: medyagh/local-dev-example-with-minikube
+       - 
+         name: start minikube
+         uses: medyagh/setup-minikube@latest
+       - 
+         name: check kubectl
+         run: kubectl --version
+       - 
+         name: check cluster
+         run: kubectl clister-info
 
     
        
