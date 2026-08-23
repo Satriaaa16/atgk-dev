@@ -43,4 +43,4 @@ jobs:
        push: true
        tags: |
            ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest
-           ghcr.io/atgk:latest
+           ghcr.io/${{github.repository_owner}}/${{github.event.repository.name}}:latest
