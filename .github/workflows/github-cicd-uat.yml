@@ -46,6 +46,7 @@ jobs:
           # ghcr.io/satria16alan/${{github.event.repository.name}}:latest
   containers-test:
     runs-on: ubuntu-latest
+    needs: build-test
     steps: 
 
     - 
@@ -53,7 +54,7 @@ jobs:
      run: sudo apt install podman
     -
      name: podman pull 
-     run: ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest
+     run: podman pull ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest
     -
      name: podman run
      run: podman run -t test-atgk \ ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest \ --port:80
