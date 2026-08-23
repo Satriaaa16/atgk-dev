@@ -63,7 +63,7 @@ jobs:
     -
      name: podman run
      run: |
-       podman run -t -p 8080:80 atgk-dev
+       podman run -d -p 8080:80 atgk-dev
 
        podman ps
 
