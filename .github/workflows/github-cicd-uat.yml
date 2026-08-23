@@ -55,7 +55,7 @@ jobs:
      name: install podman
      run: |
        sudo apt install podman
-       sudp apt install curl
+       sudo apt install curl
     -
      name: podman pull 
      run: podman pull ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest > image.txt
