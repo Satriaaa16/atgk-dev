@@ -60,7 +60,7 @@ jobs:
      name: podman pull 
      run: podman pull ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest > image.txt
     -
-     name: podman verivy pull
+     name: podman verify pull
      run: |
        podman image list
        cat image.txt
@@ -75,6 +75,9 @@ jobs:
 
        container=$(podman ps -q | head -n 1);
 
-       podman exec -it $container curl --retry 3 http://localhost:80 -I
+       podman exec -it $container curl --retry 3 http://localhost:80 -I 
+       podman exec -it $container curl http://localhost:80 -v
+
+    
        
   
