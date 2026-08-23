@@ -73,7 +73,7 @@ jobs:
        cat id-container.txt
        sleep 3
 
-       container=(podman ps -q | head -n 1);
+       container=$(podman ps -q | head -n 1);
 
        podman exec -it $container curl --retry 3 http://localhost:80 -I
        
