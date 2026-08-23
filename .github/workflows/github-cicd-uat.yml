@@ -54,8 +54,15 @@ jobs:
      run: sudo apt install podman
     -
      name: podman pull 
-     run: podman pull ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest
+     run: podman pull ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest > image.txt
+    -
+     name: podman verivy pull
+     run: |
+       podman image list
+       cat image.txt
     -
      name: podman run
-     run: podman run -t test-atgk \ ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest \ --port:80
+     run: |
+       podman run -t atgk-dev \ 
+       --port 80
   
