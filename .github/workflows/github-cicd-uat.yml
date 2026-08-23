@@ -43,4 +43,18 @@ jobs:
        push: true
        tags: |
            ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest
-           ghcr.io/satria16alan/${{github.event.repository.name}}:latest
+          # ghcr.io/satria16alan/${{github.event.repository.name}}:latest
+  containers-test:
+    runs-on: ubuntu-latest
+    steps: 
+
+    - 
+     name: install podman
+     run: sudo apt install podman
+    -
+     name: podman pull 
+     run: ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest
+    -
+     name: podman run
+     run: podman run -t test-atgk \ ${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest \ --port:80
+  
