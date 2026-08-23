@@ -103,7 +103,8 @@ jobs:
            kubectl create deployment atgk-deployment --image=${{ secrets.DOCKERHUB_USERNAME }}/${{github.event.repository.name}}:latest --replicas=3
            kubectl get deployment -A
            kubectl get pods -A
-
+           kubectl rollout status deployment atgk-deployment --timeout=60s
+  
     
        
   
