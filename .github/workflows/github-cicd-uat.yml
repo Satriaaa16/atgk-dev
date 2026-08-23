@@ -70,7 +70,8 @@ jobs:
        podman run -d -p 8080:80 atgk-dev
 
        podman ps
-      
-       curl:http//localhost:8080
+       sleep 3
+       
+       curl --retry 3 http//localhost:8080 -I
        
   
