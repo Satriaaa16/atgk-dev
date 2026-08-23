@@ -93,7 +93,7 @@ jobs:
          uses: medyagh/setup-minikube@latest
        - 
          name: check kubectl
-         run: kubectl --version
+         run: kubectl 
        - 
          name: check cluster
          run: kubectl clister-info
