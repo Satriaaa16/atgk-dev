@@ -78,7 +78,7 @@ jobs:
        podman exec -it $container curl --retry 3 http://localhost:80 -I 
        podman exec -it $container curl http://localhost:80 -v
     
-    kubernetes-test:
+  kubernetes-test:
        runs-on: ubuntu-latest
        needs: build-test
        steps: 
